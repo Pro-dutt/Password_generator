@@ -3,10 +3,27 @@
 #include<ctime>
 #include<vector>
 #include<sstream>
+#include<fstream>
 
 using namespace std;
-
 const int MAX=52;
+
+class File
+{
+    public:
+        void create_file(string temp)
+        {
+            string input=temp;
+            string str_file;
+            cout<<"Enter name of the file: "<<endl;
+            cin>>str_file;
+            ofstream MyFile(str_file);
+            MyFile<<temp<<endl;
+            MyFile.close();
+        }
+
+};
+
 class Random
 {
     //String randomizer
@@ -86,6 +103,7 @@ int main()
     srand(time(NULL));
     string str1,str2,str3;
     Random r;
+    File f;
     int size,ch;
     char c;
     
@@ -123,34 +141,41 @@ int main()
     {
         case 1:
             cout<<"\nThe Random string is: "<<str1<<endl;
+            f.create_file(str1);
             break;
 
         case 2:
             cout<<"\nRandom numbers are: "<<str2<<endl;
+            f.create_file(str2);
             break;
 
         case 3:
             cout<<"\nRandom characters are: "<<str3<<endl;
+            f.create_file(str3);
             break;
 
         case 4:
             cout<<"\nRandom string, charcter are: "<<endl;
             cout<<r.final_conv(str4,size);
+            f.create_file(str4);
             break;
 
         case 5:
             cout<<"\nRandom string, number are: "<<endl;
             cout<<r.final_conv(str5,size);
+            f.create_file(str5);
             break;
 
         case 6:
             cout<<"\nRandom charcter, number are: "<<endl;
             cout<<r.final_conv(str6,size);
+            f.create_file(str6);
             break;
 
         case 7:
             cout<<"\nRandom string, character, number are: "<<endl;
             cout<<r.final_conv(str7,size);
+            f.create_file(str7);
             break;
 
         default:
