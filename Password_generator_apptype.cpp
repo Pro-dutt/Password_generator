@@ -73,18 +73,22 @@ class Random
     public:
         string convert_to_string(vector<int>&rand,int size){
             stringstream st;
-            for(int i=0;i<rand.size();i++){
-                st<<rand[i];
+            if(rand.size()>0){
+                for(int i=0;i<rand.size();i++)
+                {
+                    st<<rand[i];
+                }
             }
             return st.str();
         }
     
     public:
-        string final_conv(string res, int size){
+        string final_conv(string res, int size)
+        {
             string final_str;
             for(int i=0;i<size;i++)
             {
-                final_str=final_str+res[rand()%res.size()];
+                final_str=final_str+res[rand() % res.size()];
             }
             return final_str;
         }
@@ -166,11 +170,10 @@ int main()
         cout<<"Case not valid";
 
     vector<int> randomNumbers=r.random_num(size);
-    //str1=r.string_gen(size);
+    str1=r.string_gen(size);
     //r.print_num(randomNumbers,size);
-    //str2=r.convert_to_string(randomNumbers,size);
-    //str3=r.sp_char_gen(size);
-    
+    str2=r.convert_to_string(randomNumbers,size);
+    str3=r.sp_char_gen(size);
     string str4=str1+str3;
     string str5=str1+str2;
     string str6=str3+str2;
