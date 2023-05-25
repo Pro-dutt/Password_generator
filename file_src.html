@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+
+<style>
+  
+  p{
+    font-family: Arial;
+  }
+  .password{
+    text-align: center;
+    background-color: red;
+    color: white;
+    font-family: Arial;
+    padding: 16px;
+  }
+
+  .generator_string{
+    font-size: 25px;
+  }
+
+  .button1{
+    background-color: rgb(0, 185, 0);
+    color:white;
+    border: none;
+    cursor: pointer;
+    height:55px;
+    width:55px;
+    border-radius: 55px;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: background-color 0.15s;
+  }
+
+  .button1:hover{
+    background-color:rgb(1, 143, 1);
+  }
+  .button1:active{
+    opacity: 0.7;
+  }
+
+  .input_pass{
+    font-size: 35px;
+  }
+
+  .input_box{
+    width: 45px;
+    height: 25px;
+  }
+
+  .output_box{
+    width: 200px;
+    height: 35px;
+    border: 1px solid black;
+    margin-left: 5px;
+    font-size: 25px;
+    padding-left: 45px;
+  }
+
+  .flex_box{
+    display: flex;
+    align-items: center;
+  }
+
+  .text_conv{
+    background-color: rgb(0, 102, 255);
+    border-style: none;
+    padding: 16px;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #a3a3a3;
+    cursor: pointer;
+    align-items: center;
+  }
+
+  .text_conv:active{
+    margin-left: 5px;
+    margin-top: 5px;
+    box-shadow: 0px 0px 0px #ffffff;
+  }
+
+  .flex_box1{
+    justify-content: center;
+  }
+</style>
+</head>
+<body>
+
+  <h1 class="password">
+    Password Generator!
+  </h1>
+
+  <p>
+    <span class="input_pass">
+      Input the password length:
+    </span>
+    <input type="number" value="script" class="input_box" id="my_input">
+  </p>
+
+    <div class="flex_box">
+      <button class="button1" id="button1">
+        1
+      </button>
+      <p class="generator_string">
+        String generator:
+      </p>
+      <output id="myOutput1" class="output_box">
+      </output>    
+    </div>
+  
+  <div class="flex_box">
+    <button class="button1" id="button2">
+      2
+    </button>
+    <p class="generator_string">
+      Number generator:
+    </p>
+    <output id="myOutput2" class="output_box">
+    </output>    
+  </div>
+
+  <div class="flex_box">
+    <button class="button1" id="button3">
+      3
+    </button>
+    <p class="generator_string">
+      Symbol generator:
+    </p>
+    <output id="myOutput3" class="output_box">
+    </output>    
+  </div>
+
+  <div class="flex_box">
+    <button class="button1" id="button4">
+      4
+    </button>
+    <p class="generator_string">
+      String, Number generator:
+    </p>
+    <output id="myOutput4" class="output_box">
+    </output>    
+  </div>
+
+  <div class="flex_box">
+    <button class="button1" id="button5">
+      5
+    </button>
+    <p class="generator_string">
+      String, Symbol generator:
+    </p>
+    <output id="myOutput5" class="output_box">
+    </output>    
+  </div>
+
+  <div class="flex_box">
+    <button class="button1" id="button6">
+      6
+    </button>
+    <p class="generator_string">
+      Number,Symbol generator:
+    </p>
+    <output id="myOutput6" class="output_box">
+    </output>    
+  </div>
+
+  <div class="flex_box">
+    <button class="button1" id="button7">
+      7
+    </button>
+    <p class="generator_string">
+      String, Number, Symbol generator:
+    </p>
+    <output id="myOutput7" class="output_box">
+    </output>    
+  </div>
+
+  <div class="flex_box1">
+    <button class="text_conv">
+      TO TXT
+    </button>
+    <input type="button" id="bt" value="TO TXT" class="text_conv" onclick="createFile()">
+  </div>
+</body>
+
+<script>
+
+class Random{
+  getInputLength(callback) 
+  {
+    let input = document.getElementById("my_input");
+    let length;
+    input.addEventListener("keyup", function(event) 
+    {
+        if (event.key === "Enter") 
+        {
+          length=input.value;
+          input.value = "";
+          callback(length)
+          //console.log(length);
+        }
+    });
+  }
+
+  stringGen(length) 
+  {
+    const alphabet = [
+      "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
+      "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
+      "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+    ];
+
+    let res = "";
+    for (let i = 0; i < length; i++) {
+      res += alphabet[Math.floor(Math.random() * alphabet.length)];
+    }
+    return res;
+    //console.log(res);
+  }
+
+  numberGen(length) 
+  {
+    const number = [
+      '0','1','2','3','4','5','6','7','8','9'
+    ];
+
+    let res = "";
+    for (let i = 0; i < length; i++) {
+      res += number[Math.floor(Math.random() * number.length)];
+    }
+    return res;
+    console.log(res);
+  }  
+
+  spCharGen(length) {
+    const spChars = ["@", "#", "$", "^", "&", "*", "!", "~", "/", "*", "-"];
+    let res = "";
+    for (let k = 0; k < length; k++) {
+      res += spChars[Math.floor(Math.random() * spChars.length)];
+    }
+    return res;
+    console.log(res)
+  }
+
+  strNumGen(length){
+      const strNum = [ 
+      "a", "b", "c", "d", "e",'1',"f", "g",'2', "h", "i", "j", "k", "l", 
+      "m", "n",'3', "o","p", "q", "r",'4', "s", "t", "u", "v", "w", "x", 
+      "y", "z","A", "B",'5',"C",'6', "D", "E", "F", "G", "H", "I", '7', "J", 
+      "K", "L", "M", "N", "O","P", "Q", '8', "R", "S", "T", "U", "V", 
+      "W", "X", "Y", "Z",'9'
+    ];
+      let res = "";
+      for (let k = 0; k < length; k++) {
+        res += strNum[Math.floor(Math.random() * strNum.length)];
+      }
+      return res;
+      console.log(res)
+    }
+
+    strSymGen(length){
+    const strSym=["a", "b", "c", "$", "d", "e", "f", "g", "h", "i", "*", "j", "k", "l", "m", "n", "o",
+      "p", "q", "r", "s", "t",  "!", "u", "v", "w", "/", "x", "y", "z","@",
+      "A", "B", "C", "&", "D", "E", "F", "G", "H", "-", "I", "J", "K", "L", "#", "M", "N", "O",
+      "P", "Q", "^", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","~"];
+      let res = "";
+      for (let k = 0; k < length; k++) {
+        res += strSym[Math.floor(Math.random() * strSym.length)];
+      }
+      return res;
+      console.log(res)
+    }
+
+    numSymGen(length){
+      const numSym=['0','1','2','3','4','5','6','7','8','9',
+      "@", "#", "$", "^", "&", "*", "!", "~", "/", "*", "-"]
+      let res = "";
+      for (let k = 0; k < length; k++) {
+        res += numSym[Math.floor(Math.random() * numSym.length)];
+      }
+      return res;
+      console.log(res)
+    }
+
+    strSymNumGen(length){
+    const strSym=["a", "b", '1', "c", "$", "d", '5', "e", "f", "g", "h", "i", "*", 
+      "j", "k", "l", "m", '4', "n", "o","p", '8', "q", "r", "s", "t",  "!", "u", "v", 
+      '7', "w", "/", "x", "y", "z","@",'0',"A", '6', "B", "C", '2', "&", "D", '3', "E", 
+      "F", "G", "H", "-", "I", "J", "K", "L", "#", "M", "N", "O","P", "Q", "^", "R", "S",
+      "T","~", "U", "V", "W", "X", "Y", "Z",'9'];
+      let res = "";
+      for (let k = 0; k < length; k++) {
+        res += strSym[Math.floor(Math.random() * strSym.length)];
+      }
+      return res;
+      console.log(res)
+    }
+
+  }
+
+
+
+  class Check{
+    constructor(){
+      this.alphabet = [
+      "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
+      "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
+      "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+      ];
+      this.num=['0','1','2','3','4','5','6','7','8','9']
+      this.spChars = ["@", "#", "$", "^", "&", "*", "!", "~", "/", "*", "-"]; 
+    }
+    
+    
+    ispresentNum(str){
+      for(let i=0;i<str.length;i++)
+      {
+          if(this.num.includes(str[i])){
+            return true;
+          }
+      }
+      return false;
+    }
+
+    ispresentSym(str){
+      for(let i=0;i<str.length;i++)
+      {
+          if(this.spChars.includes(str[i])){
+            return true;
+          }
+      }
+      return false;
+    }
+  }
+
+  class SaveFile{
+    createFile(temp){
+      const data=temp;
+      const textToBLOB = new Blob([data], { type: "text/plain" });
+      var filename = new Date();
+      var month =new Date(); //months from 1-12
+      month = month.getMonth();
+
+      var day = new Date();
+      var day = day.getUTCDate();
+
+      var year = new Date();
+      var year = year.getUTCFullYear();
+
+      newdate = year + "/" + month + "/" + day;
+      const sFileName = filename; // The file to save the data.
+
+      let newLink = document.createElement("a");
+      newLink.download = new Date();
+
+      if (window.webkitURL != null) {
+                newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+      } else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+      }
+
+      newLink.click();
+    }
+  }
+
+  function main(){
+    const r=new Random();
+    const c=new Check();
+    const s=new SaveFile();
+    let str1,str2,str3,str4,str5,str6,str7;
+    // const buttonToTxt=document.getElementById('bt')    
+    r.getInputLength(function(length){
+      var num1=length;
+      console.log(num1);
+
+      const generateButton1=document.getElementById("button1");
+      const output1=document.getElementById("myOutput1");
+
+      generateButton1.addEventListener("click",function(){
+        str1=r.stringGen(length);
+        console.log(str1);
+        //const password=r.stringGen(length);
+        output1.textContent=str1;   
+      });
+
+      const generateButton2=document.getElementById("button2"); 
+      const output2=document.getElementById("myOutput2")
+
+      generateButton2.addEventListener("click",function(){
+        str2=r.numberGen(length);
+        console.log(str2);
+        // const password2=r.numberGen(length);
+        output2.textContent=str2;
+      })
+
+      const generateButton3=document.getElementById("button3"); 
+      const output3=document.getElementById("myOutput3")
+
+      generateButton3.addEventListener("click",function(){
+        str3=r.spCharGen(length);
+        console.log(str3);
+        // const password3=r.spCharGen(length);
+        output3.textContent=str3;
+      })
+
+      console.log(str4);
+      const generateButton4=document.getElementById("button4"); 
+      const output4=document.getElementById("myOutput4")
+
+      generateButton4.addEventListener("click",function(){
+        str4=r.strNumGen(length)
+        if(c.ispresentNum(str4)===true){
+          output4.textContent=str4;
+        }
+      })
+
+      const generateButton5=document.getElementById("button5"); 
+      const output5=document.getElementById("myOutput5")
+
+      generateButton5.addEventListener("click",function(){
+        str5=r.strSymGen(length);
+        if(c.ispresentSym(str5)===true){
+          output5.textContent=str5;
+        }
+      })
+
+      const generateButton6=document.getElementById("button6"); 
+      const output6=document.getElementById("myOutput6")
+
+      generateButton6.addEventListener("click",function(){
+        str6=r.numSymGen(length);
+        if(c.ispresentSym(str6)===true){
+          output6.textContent=str6;
+        }
+      })
+
+      const generateButton7=document.getElementById("button7"); 
+      const output7=document.getElementById("myOutput7")
+
+      generateButton7.addEventListener("click",function(){
+        str7=r.strSymNumGen(length);
+        console.log(str7);
+        if(c.ispresentSym(str7) && c.ispresentNum(str7)){ 
+            output7.textContent=str7;
+          }
+      })
+    });
+
+  }
+  main();
+</script>
+</html>
